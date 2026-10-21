@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
@@ -53,6 +54,51 @@
 			.text-primary {
 				color: #1772d0;
 			}
+
+            /* 中文简介点击展开面板 */
+            .bio-hover-container {
+                display: inline-block;
+                vertical-align: baseline;
+            }
+            .bio-hover-trigger {
+                color: #1772d0;
+                font-size: 0.82em;
+                font-weight: normal;
+                cursor: pointer;
+                white-space: nowrap;
+                text-decoration: none;
+            }
+            .bio-hover-trigger:hover,
+            .bio-hover-trigger:focus {
+                color: #f09228;
+                text-decoration: underline;
+                outline: none;
+            }
+            .bio-hover-panel {
+                display: none;
+                box-sizing: border-box;
+                width: 100%;
+                margin: 12px 0 18px;
+                padding: 16px 18px;
+                background: #eaf4ff;
+                color: #333;
+                border: 1px solid #c8e0fa;
+                border-radius: 8px;
+                box-shadow: 0 3px 12px rgba(35, 95, 150, 0.10);
+                font-size: 14px;
+                font-weight: normal;
+                line-height: 1.8;
+                text-align: left;
+                white-space: normal;
+            }
+            .bio-hover-panel.is-open {
+                display: block;
+            }
+            @media (max-width: 600px) {
+                .bio-hover-panel {
+                    padding: 12px 14px;
+                }
+            }
 		</style>
 	<!--[if lt IE 9]>
 	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -65,11 +111,37 @@
 	<div class="container-narrow">
 		<div class="title">
 
-			<h4><strong>Ji Zhang</strong> &nbsp;&nbsp;&nbsp;&nbsp; 
+			<h4><strong>Ji Zhang</strong>
+            <span class="bio-hover-container">
+                <a class="bio-hover-trigger" id="bio-toggle" href="#bio-panel"
+                   aria-controls="bio-panel" aria-expanded="false">[中文简介]</a>
+            </span>
+            &nbsp;&nbsp;&nbsp;&nbsp; 
 			
 			<img class="img-thumbnail-lizi" height="220" hspace="20" src="./files/JiZhang/jizhang_.jpg" style="float:right"> 
 	
 			</h4>
+            <div class="bio-hover-panel" id="bio-panel" aria-hidden="true">
+                张继，电子科技大学计算机学院特聘副教授，2024年博士毕业于电子科技大学。研究方向为多模态学习、具身智能。
+                以第一或通讯作者身份在 TPAMI、IJCV、CVPR、中国科学：信息科学等人工智能领域知名期刊和会议上发表论文20余篇。
+                主持国自然青年基金项目、博士后特别资助、面上、国资计划（B档）项目以及 GF 横向项目等8项。
+                获 ACM Chengdu 新星奖、ACM MM'26 青少年精神疾病预测挑战赛全球冠军等奖项7项。编写中/英文教材3部。
+                相关成果在四川省地震局、中国电科等多家单位的核心业务场景中落地应用，取得了一定的社会经济效益。
+            </div>
+            <script>
+                (function () {
+                    var toggle = document.getElementById('bio-toggle');
+                    var panel = document.getElementById('bio-panel');
+                    if (!toggle || !panel) return;
+                    toggle.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        var isOpen = panel.classList.toggle('is-open');
+                        toggle.textContent = isOpen ? '[收起]' : '[中文简介]';
+                        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                        panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+                    });
+                })();
+            </script>
 			Associate Professor, University of Electronic Science and Technology of China<br> 
 			<!-- Assistant Professor, Southwest Jiaotong University<br> -->
 			<!-- <a href="https://scai.swjtu.edu.cn/">School of Computing and Artificial Intelligence</a> <br> -->
