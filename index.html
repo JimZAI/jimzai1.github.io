@@ -95,14 +95,15 @@
             .bio-hover-panel.is-open {
                 display: block;
             }
-            /* 面板自适应容器宽度，左右留白一致；头像保持原始尺寸与浮动布局 */
+            /* 面板右边缘避开右侧头像，并与头像保持间距 */
             .bio-hover-panel {
                 width: auto;
-                margin-right: 20px;
+                /* 头像约 175px 宽，另留出 hspace 和视觉间距 */
+                margin-right: 205px;
             }
             @media (max-width: 600px) {
                 .bio-hover-panel {
-                    margin-right: 12px;
+                    margin-right: 0;
                     padding: 12px 14px;
                 }
             }
