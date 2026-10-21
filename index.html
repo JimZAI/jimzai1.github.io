@@ -77,7 +77,8 @@
             .bio-hover-panel {
                 display: none;
                 box-sizing: border-box;
-                width: 100%;
+                width: auto;
+                max-width: 100%;
                 margin: 12px 0 18px;
                 padding: 16px 18px;
                 background: #eaf4ff;
@@ -94,9 +95,22 @@
             .bio-hover-panel.is-open {
                 display: block;
             }
+            /* 面板随页面可用宽度自适应；右侧留白与头像的 hspace 保持一致 */
+            .bio-hover-panel {
+                margin-right: 20px;
+            }
+            .img-thumbnail-lizi {
+                max-width: calc(100% - 40px);
+                height: auto;
+            }
             @media (max-width: 600px) {
                 .bio-hover-panel {
+                    margin-right: 12px;
                     padding: 12px 14px;
+                }
+                .img-thumbnail-lizi {
+                    max-width: 45%;
+                    height: auto;
                 }
             }
 		</style>
