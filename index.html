@@ -46,6 +46,22 @@
             .news-scroll-window::-webkit-scrollbar-thumb:hover { background: #7da7d0; }
             .news-scroll-window:focus-visible { outline: 2px solid #1772d0; outline-offset: 2px; }
 
+            /* Selected Papers: show the first 20 papers, scroll for the rest */
+            .papers-scroll-window {
+                overflow-y: auto;
+                overflow-x: hidden;
+                max-height: 1600px; /* fallback before JS measures 20 entries */
+                padding-right: 10px;
+                scrollbar-width: thin;
+                scrollbar-color: #a6bfd8 #edf4fb;
+                overscroll-behavior: contain;
+            }
+            .papers-scroll-window::-webkit-scrollbar { width: 9px; }
+            .papers-scroll-window::-webkit-scrollbar-track { background: #edf4fb; border-radius: 6px; }
+            .papers-scroll-window::-webkit-scrollbar-thumb { background: #a6bfd8; border-radius: 6px; }
+            .papers-scroll-window::-webkit-scrollbar-thumb:hover { background: #7da7d0; }
+            .papers-scroll-window:focus-visible { outline: 2px solid #1772d0; outline-offset: 2px; }
+
 	</style>
 
 	<title>Ji Zhang (UESTC) </title>
@@ -324,6 +340,7 @@
 		<div class="content">
 			<!-- <h5 class="text-primary" id="publications">Selected Papers</h5>  &nbsp;&nbsp;&nbsp;&nbsp; (<sup><em>*</em></sup> Equal contribution, <sup><em>+</em></sup> Project lead, <sup><em>#</em></sup> Corresponding author) -->
 		    <h5 class="text-primary" id="publications">Selected Papers</h5> 
+			<div class="papers-scroll-window" id="papers-scroll-window" tabindex="0" aria-label="Selected papers, scroll to see older publications">
 			<ul>
 				<li> <b> A Survey on Efficient Vision-Language-Action Models </b> &nbsp <a href="https://arxiv.org/abs/2510.24795">[pdf]</a> &nbsp <br> Zhaoshu Yu, Bo Wang, Pengpeng Zeng, Haonan Zhang, <b>Ji Zhang</b>, Lianli Gao, Jingkuan Song, Heng Tao Shen <br>IEEE Transactions on Pattern Analysis and Machine Intelligence (<b>TPAMI</b>), 2026 <br><br></li>
 				<li> <b> From Failure to Mastery: Generating Hard Samples for Tool-use Agents </b> &nbsp <a href="https://arxiv.org/abs/2601.01498">[pdf]</a> &nbsp <br> Bingguang Hao, Zengzhuang Xu, Yuntao Wen, Xinyi Xu, Yang Liu, Tong Zhao, Maolin Wang, Long Chen, Dong Wang, Yicheng Chen, Cunyin Peng, Xiangyu Zhao, Chenyi Zhuang, <b>Ji Zhang</b> <br>The Conference on Empirical Methods in Natural Language Processing (<b>EMNLP Main</b>), 2026 <br><br></li>
@@ -363,7 +380,38 @@
 				<li> <b> Curriculum-based Meta-learning </b> &nbsp <a href="https://dl.acm.org/doi/pdf/10.1145/3474085.3475335">[pdf]</a> &nbsp <br><b>Ji Zhang</b>, Jingkuan Song, Yazhou Yao, Lianli Gao <br>ACM International Conference on Multimedia (<b>ACM MM</b>), 2021 <br><br></li>
 				<li> <b> Particle Subswarms Collaborative Clustering </b> &nbsp <a href="https://ieeexplore.ieee.org/abstract/document/8851416/">[pdf]</a> &nbsp <br> Collins Census, Hongjun Wang, <b>Ji Zhang</b>, Ping Deng, Tianrui Li <br>IEEE Transactions on Computational Social Systems (<b>TCSS</b>), 2019<br><br></li>
 			</ul>
+            </div>
 		</div>
+
+
+<script>
+(function () {
+    function resizePapersWindow() {
+        var box = document.getElementById('papers-scroll-window');
+        if (!box) return;
+        var entries = Array.prototype.filter.call(box.querySelectorAll('li'), function (li) {
+            return li.textContent.trim().length > 0;
+        });
+        if (entries.length <= 20) {
+            box.style.maxHeight = 'none';
+            return;
+        }
+        var first = entries[0];
+        var twentieth = entries[19];
+        // Measure the top 20 papers, including their line wraps and vertical spacing.
+        var bottom = twentieth.offsetTop + twentieth.offsetHeight;
+        var top = first.offsetTop;
+        var listStyle = window.getComputedStyle(first.parentElement);
+        var paddingBottom = parseFloat(listStyle.paddingBottom) || 0;
+        box.style.maxHeight = Math.ceil(bottom - top + paddingBottom + 3) + 'px';
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', resizePapersWindow);
+    } else { resizePapersWindow(); }
+    window.addEventListener('load', resizePapersWindow);
+    window.addEventListener('resize', resizePapersWindow);
+})();
+</script>
 
 		<!-- <div class="content" id="teach">
 			<h5 class="text-primary">Teaching</h5>
