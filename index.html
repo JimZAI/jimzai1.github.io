@@ -316,13 +316,13 @@
         var entries = Array.prototype.filter.call(box.querySelectorAll('li'), function (li) {
             return li.textContent.trim().length > 0;
         });
-        if (entries.length <= 20) {
+        if (entries.length <= 10) {
             box.style.maxHeight = 'none';
             return;
         }
         var first = entries[0];
-        var twentieth = entries[19];
-        // The first 20 actual news entries are visible; older entries scroll inside the panel.
+        var twentieth = entries[9];
+        // The first 10 actual news entries are visible; older entries scroll inside the panel.
         var bottom = twentieth.offsetTop + twentieth.offsetHeight;
         var top = first.offsetTop;
         var list = first.parentElement;
@@ -392,13 +392,13 @@
         var entries = Array.prototype.filter.call(box.querySelectorAll('li'), function (li) {
             return li.textContent.trim().length > 0;
         });
-        if (entries.length <= 20) {
+        if (entries.length <= 10) {
             box.style.maxHeight = 'none';
             return;
         }
         var first = entries[0];
-        var twentieth = entries[19];
-        // Measure the top 20 papers, including their line wraps and vertical spacing.
+        var twentieth = entries[9];
+        // Measure the top 10 papers, including their line wraps and vertical spacing.
         var bottom = twentieth.offsetTop + twentieth.offsetHeight;
         var top = first.offsetTop;
         var listStyle = window.getComputedStyle(first.parentElement);
